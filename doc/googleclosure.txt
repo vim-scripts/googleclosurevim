@@ -1,0 +1,206 @@
+*googleclosure.txt*   Plugin for fast javascript development with 
+Google Closure.
+
+
+                              Reference Manual~
+
+
+==============================================================================
+CONTENTS                                              *googleclosure-contents*
+
+    1.Intro...................................|GoogleClosure|
+    2.Functionality provided..................|GoogleClosureFunctionality|
+        2.1.Class creation....................|JSClass|
+        2.2.Interface creation................|JSInterface|
+        2.3.Enum creation.....................|JSEnum|
+        2.4.Method creation...................|JSMethod|
+        2.5.Property creation.................|JSProp|
+        2.6.Get/Set...........................|JSGetSet|
+            2.6.1.Get.........................|JSGet|
+            2.6.2.Set.........................|JSSet|
+        2.7.JS universal command..............|JS|
+        2.8.Google JavaScript Linter..........|make|
+        2.9.Open package......................|JSPackage|
+    3.Options.................................|GoogleClosureOptions|
+    4.About...................................|GoogleClosureAbout|
+    5.License.................................|GoogleClosureLicense|
+
+==============================================================================
+1. Intro                                                       *GoogleClosure*
+
+The main goal of this plugin is to improve performance of developing with 
+Google Closure JavaScript library.
+
+
+==============================================================================
+2. Functionality provided                         *GoogleClosureFunctionality*
+
+------------------------------------------------------------------------------
+2.1. Class creation                                                  *JSClass*
+
+:JSClass <classDef>
+    First of all, your js file should have goog.provide('packageName'). If 
+    there is no goog.provide in your code - an error will occur.
+
+    This command creates class based on <classDef>. Examples:>
+    :JSClass MyClass
+    :JSClass private MyPrivateClass_
+    :JSClass MyClass_<BaseClass
+    :JSClass MyClass<BaseClass:IInterface1, IInterface2
+    :JSClass private MyPrivateClass_<BaseClass:IInterface1, IInterface2
+    <
+    
+    Also, JSClass command checks if base class or interfaces package is included
+    to the current js file using goog.require. If not - JSClass will create 
+    it. You can disable this feature using g:GoogleClosureAutoRequire flag.
+
+------------------------------------------------------------------------------
+2.2. Interface creation                                          *JSInterface*
+
+:JSInterface <interfaceDef>
+    First of all, your js file should have goog.provide('packageName'). If 
+    there is no goog.provide in your code - an error will occur.
+
+    This command creates interface based on <interfaceDef>. Examples:>
+    :JSInterface IMyInterface
+    :JSInterface IMyInterface<IBaseInterface
+    :JSInterface private IMyPrivateInterface_<IBaseInterface
+    <
+
+------------------------------------------------------------------------------
+2.3. Enum creation                                                    *JSEnum*
+
+:JSEnum <enumDef>
+    First of all, your js file should have goog.provide('packageName'). If 
+    there is no goog.provide in your code - an error will occur.
+
+    This command creates enum based on <enumDef>. Examples:>
+    :JSEnum MyEnum{A,B,C,D}
+    :JSEnum private MyEnum_{A,B,C,D}
+    :JSEnum private MyEnum_:string{a,b,c,d}
+    <
+
+------------------------------------------------------------------------------
+2.4. Method creation                                                *JSMethod*
+
+:JSMethod <methodDef>
+    First of all, your js file should have goog.provide('packageName'). If 
+    there is no goog.provide in your code - an error will occur.
+
+    Also, you should have class or interface definition below current line.
+
+    This command creates method based on <methodDef>. Examples:>
+    :JSMethod myMethod
+    :JSMethod myMethod:boolean
+    :JSMethod myMethod(prop1:number, prop2:string):boolean
+    :JSMethod protected abstract myMethod(prop1:number):boolean
+    :JSMethod public static myMethod(param:number = 3):void
+    <
+
+------------------------------------------------------------------------------
+2.5. Property creation                                                *JSProp*
+
+:JSProp <propDef>
+    First of all, your js file should have goog.provide('packageName'). If 
+    there is no goog.provide in your code - an error will occur.
+
+    Also, you should have class definition below current line.
+
+    This command creates class property based on <propDef>. Examples:>
+    :JSProp myPublicProp
+    :JSProp private myPrivateProp_:number
+    :JSProp protected myProtectedProp_:number = 100
+    :JSProp myProp:string = 'hello'
+    <
+
+------------------------------------------------------------------------------
+2.6. Get/Set                                                        *JSGetSet*
+
+:JSGetSet
+    This command generates get/set functions for current selected property
+    line.
+
+------------------------------------------------------------------------------
+2.6.1. Get                                                             *JSGet*
+
+:JSGet
+    This command generates get function for current selected property
+    line.
+
+------------------------------------------------------------------------------
+2.6.2. Set                                                             *JSSet*
+
+:JSSet
+    This command generates get function for current selected property
+    line.
+
+------------------------------------------------------------------------------
+2.7. JS universal command                                                 *JS*
+
+:JS <command>
+    Examples:>
+    :JS public static function myFunction():Number
+    :JS private var myProp_:Number
+    <
+
+------------------------------------------------------------------------------
+2.8. Google JavaScript Linter                                           *make*
+
+:make
+    You can call :make for running Google JavaScript linter on current file.
+
+
+------------------------------------------------------------------------------
+2.9. Open package                                                  *JSPackage*
+
+:JSPackage <packageName>
+    Find package in deps.js and open package file in new buffer.
+    g:GoogleClosureDeps is required.
+
+
+==============================================================================
+3. Options                                              *GoogleClosureOptions*
+
+g:GoogleClosureAutoRequire
+    Automatically add goog.require for :JSClass and :JSInterface commands if 
+    parent classes or interfaces do not exist
+
+g:GoogleClosureDeps
+    Path to deps.js
+
+
+==============================================================================
+4. About                                                  *GoogleClosureAbout*
+
+Powered by Aleksandr Batsuev.
+mail: batsuev@gmail.com
+skype: alex.batsuev
+
+Feel free to contact me.
+
+Project page: 
+https://github.com/batsuev/googleclosurevim
+
+==============================================================================
+5. License                                              *GoogleClosureLicense*
+
+This plugin is distributed under MIT license
+The MIT License (MIT)
+Copyright (c) 2011 Aleksandr Batsuev
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
